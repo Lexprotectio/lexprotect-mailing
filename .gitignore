@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+*.pyo
+leads.csv
+gmail-account1-token.json
+gmail-account2-token.json
+*-credentials.json
+*-token.json
