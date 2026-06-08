@@ -124,6 +124,15 @@ class LeadFinder:
         karar vericinin (Legal, Compliance, Marketing, CEO vb.) e-posta ve isim bilgilerini bulur.
         Eğer API'ler yoksa, genel bir kurumsal email formatı üretir.
         """
+        # Clean domain
+        domain = domain.strip().lower()
+        if "://" in domain:
+            domain = domain.split("://")[1]
+        if "/" in domain:
+            domain = domain.split("/")[0]
+        if domain.startswith("www."):
+            domain = domain[4:]
+
         contact_info = {
             "Email": f"info@{domain}",
             "Name": f"{company_name} Yetkilisi"
@@ -212,7 +221,17 @@ class LeadFinder:
         
         for lead in raw_leads:
             company = lead["Company"]
-            domain = lead["Website"]
+            raw_domain = lead["Website"]
+            
+            # Clean domain
+            domain = raw_domain.strip().lower()
+            if "://" in domain:
+                domain = domain.split("://")[1]
+            if "/" in domain:
+                domain = domain.split("/")[0]
+            if domain.startswith("www."):
+                domain = domain[4:]
+                
             print(f"\n⚡ Zenginleştiriliyor: {company} ({domain})...")
             
             # Apollo/Hunter ile e-posta ve yetkili bul
