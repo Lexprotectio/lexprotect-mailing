@@ -48,7 +48,7 @@ class OutreachManager:
         # Check for placeholders
         if self.openai_key and "<" in self.openai_key: self.openai_key = None
         if self.resend_key and "<" in self.resend_key: self.resend_key = None
-        if self.resend_from and "<" in self.resend_from: self.resend_from = "LexProtect Outreach <outreach@yourdomain.com>"
+        if self.resend_from and "<YOUR_" in self.resend_from.upper(): self.resend_from = "LexProtect Outreach <outreach@yourdomain.com>"
 
     def generate_personalized_email(self, name, company, website, violation_type, violation_detail):
         """
