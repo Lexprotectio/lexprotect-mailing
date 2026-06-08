@@ -61,7 +61,20 @@ def main():
             lead["Outreach_Date"] = ""
             lead["Personalized_Message"] = ""
     else:
-        new_leads = finder.get_daily_leads(limit=args.limit)
+        new_leads = finder.get_daily_leads(limit=args.limit) or []
+        test_exists = any(l.get("Email", "").strip().lower() == "av.akaratas@gmail.com" for l in new_leads)
+        if not test_exists:
+            new_leads.append({
+                "Email": "av.akaratas@gmail.com",
+                "Name": "Av. Akarataş",
+                "Company": "Akarataş Hukuk Bürosu",
+                "Website": "akaratashukuk.com",
+                "Violation_Type": "Marka İtibar İhlali",
+                "Violation_Detail": "Google Haritalar üzerinde büronuzun ismiyle oluşturulmuş sahte/yanıltıcı olumsuz yorumlar tespit edilmiş ve dijital itibarınızın zedelendiği gözlemlenmiştir.",
+                "Outreach_Status": "Pending",
+                "Outreach_Date": "",
+                "Personalized_Message": ""
+            })
         
     if new_leads:
         print(f"✅ Toplam {len(new_leads)} yeni potansiyel müşteri tespit edildi.")
